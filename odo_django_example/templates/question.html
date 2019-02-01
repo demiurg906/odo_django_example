@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}
+    <h2>Question from {{ question.author }}</h2>
+    <ul>
+        <li>Author: {{ question.author }}</li>
+        <li>Date: {{ question.pub_date }}</li>
+        <li>Text: {{ question.question_text }}</li>
+    </ul>
+{% endblock %}
