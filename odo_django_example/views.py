@@ -1,7 +1,7 @@
 from django.http import HttpRequest, Http404
 from django.shortcuts import render
 
-from odo_django_example.models import Question
+from odo_django_example.models import Question, Answer
 
 
 def index(request: HttpRequest):
@@ -20,3 +20,11 @@ def get_question(request: HttpRequest, question_id: int):
         return render(request, 'question.html', {'question': question})
     except Question.DoesNotExist:
         raise Http404(f'Question {question_id} does not exists')
+
+
+def get_answer(request: HttpRequest, answer_id: int):
+    try:
+        answer = Answer.objects.get(pk=answer_id)
+        return render(request, 'answer.html', {'answer': answer})
+    except Answer.DoesNotExist:
+        raise Http404(f'Answer {answer_id} does not exists')

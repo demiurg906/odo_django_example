@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block body %}
+    <h2>Answer to <a href="/question/{{ answer.question.pk }}">question</a></h2>
+    <ul>
+        <li>Answer: {{ answer.choice_text }}</li>
+        <li>Rate: {{ answer.votes }}</li>
+    </ul>
+{% endblock %}

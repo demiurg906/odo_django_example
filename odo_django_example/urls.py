@@ -22,6 +22,7 @@ urlpatterns = [
     path('', views.index),
     path('hello/', views.hello),
     path('hello/<str:name>/', views.hello),
+    path('answer/<int:answer_id>/', views.get_answer),
     path('question/<int:question_id>/', views.get_question),
     path('admin/', admin.site.urls),
 ]
