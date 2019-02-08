@@ -1,13 +1,20 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <h1>Hello!</h1>
-    <p>Hello world</p>
+  {# Новая колонка в ряду #}
+  <div class="col-md">
+    <h2>Hello!</h2>
+    <p class="lead">Hello world</p>
+  </div>
+
+  {# Новая колонка в ряду #}
+  <div class="col-md">
     <h2>Examples</h2>
-    <p><a href="google.com">google it</a></p>
+    <p><a href="https://google.com">google it</a></p>
     <ul>
-        <li>Point 1</li>
-        <li>Point 2</li>
-        <li>Point 3</li>
+      <li>Point 1</li>
+      <li>Point 2</li>
+      <li>Point 3</li>
     </ul>
+  </div>
 {% endblock %}
