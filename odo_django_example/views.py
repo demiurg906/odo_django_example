@@ -28,3 +28,8 @@ def get_answer(request: HttpRequest, answer_id: int):
         return render(request, 'answer.html', {'answer': answer})
     except Answer.DoesNotExist:
         raise Http404(f'Answer {answer_id} does not exists')
+
+
+def get_questions(request: HttpRequest):
+    questions = Question.objects.order_by('pk').all()
+    return render(request, 'questions.html', {'questions': questions})

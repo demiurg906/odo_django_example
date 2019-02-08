@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block body %}
+  <ul>
+    {% for question in questions %}
+      <li><a href="/question/{{ question.pk }}">Question №{{ question.pk }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

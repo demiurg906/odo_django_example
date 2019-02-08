@@ -24,5 +24,6 @@ urlpatterns = [
     path('hello/<str:name>/', views.hello),
     path('answer/<int:answer_id>/', views.get_answer),
     path('question/<int:question_id>/', views.get_question),
+    path('questions/', views.get_questions),
     path('admin/', admin.site.urls),
 ]
