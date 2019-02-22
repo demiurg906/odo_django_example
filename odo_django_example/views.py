@@ -49,7 +49,7 @@ def ask_question(request: HttpRequest):
                 author=current_user
             )
             question.save()
-            return HttpResponseRedirect(f'/question/{question.pk}')
+            return HttpResponseRedirect('/question/{}'.format(question.pk))
     else:
         form = QuestionForm()
 
