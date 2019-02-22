@@ -1,6 +1,8 @@
-from django.http import HttpRequest, Http404
+from django.contrib.auth.models import AnonymousUser, User
+from django.http import HttpRequest, Http404, HttpResponseRedirect
 from django.shortcuts import render
 
+from odo_django_example.forms import QuestionForm
 from odo_django_example.models import Question, Answer
 
 
@@ -33,3 +35,26 @@ def get_answer(request: HttpRequest, answer_id: int):
 def get_questions(request: HttpRequest):
     questions = Question.objects.order_by('pk').all()
     return render(request, 'questions.html', {'questions': questions})
+
+
+def ask_question(request: HttpRequest):
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            current_user = request.user
+            if isinstance(current_user, AnonymousUser):
+                current_user = get_guest_user()
+            question = Question.objects.create(
+                question_text=form.cleaned_data['text'],
+                author=current_user
+            )
+            question.save()
+            return HttpResponseRedirect(f'/question/{question.pk}')
+    else:
+        form = QuestionForm()
+
+    return render(request, 'ask-question.html', {'form': form})
+
+
+def get_guest_user():
+    return User.objects.get(username='Guest')

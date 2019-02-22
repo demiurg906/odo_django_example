@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+  <div class="container">
+    {# Новый ряд в таблице. mt-5 делает отступ #}
+    <div class="row mt-5">
+      <div class="col-md">
+        <h2>Ask a question</h2>
+        <form action="/ask-question/" method="post">
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" value="Ask">
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
