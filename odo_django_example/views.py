@@ -42,7 +42,7 @@ def ask_question(request: HttpRequest):
         form = QuestionForm(request.POST)
         if form.is_valid():
             current_user = request.user
-            if isinstance(current_user, AnonymousUser):
+            if current_user.is_authenticated :
                 current_user = get_guest_user()
             question = Question.objects.create(
                 question_text=form.cleaned_data['text'],

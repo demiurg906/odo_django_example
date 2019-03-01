@@ -44,3 +44,45 @@ python manage.py createsuperuser
 ```
 
 От вас потребуется ввести имя пользователя, электоронную почту (любую) и пароль. Пароль при вводе не будет отображаться, но это нормально, на самом деле вы его печатаете.
+
+## Как рабоать с пользователями
+
+Если вы хотите создать `view` для какой-либо работы с пользователями, то вам пригодятся следующие методы:
+
+```python
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+
+def login_view(request):
+    # текущий пользователь
+    current_user = request.user
+    
+    # получили откуда-нибудь (из формы, например)
+    username, password = ...     
+    # найти подходящего пользователя в базе данных
+    user = authenticate(request, username=username, password=password)
+    
+    if user is not None:
+        # если такой пользователь есть, то залогинить
+        login(request, user)
+        ... # перенаправить на какую-нибудь странцу
+    else:
+        # подходящего пользователя нет
+        ... # отправить страницу с ошибкой
+        
+
+def logout_view(request):
+    # разлогинить пользователя
+    logout(request)
+
+
+def register_view(request):
+    # получили откуда-нибудь (из формы, например)
+    username, password, email = ...
+    # создали нового юзера
+    user = User.objects.create_user(username, email, password)
+    # сохранили нового юзера в базу данных
+    user.save()
+    
+    # после этого его можно залогинить и перенаправить куда-нибудь
+```
