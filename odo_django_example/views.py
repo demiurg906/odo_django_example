@@ -24,7 +24,7 @@ def get_question(request: HttpRequest, question_id: int):
         question = Question.objects.get(pk=question_id)
         return render(request, 'question.html', {'question': question})
     except Question.DoesNotExist:
-        raise Http404(f'Question {question_id} does not exists')
+        raise Http404('Question {} does not exists'.format(question_id))
 
 
 def get_answer(request: HttpRequest, answer_id: int):
@@ -32,7 +32,7 @@ def get_answer(request: HttpRequest, answer_id: int):
         answer = Answer.objects.get(pk=answer_id)
         return render(request, 'answer.html', {'answer': answer})
     except Answer.DoesNotExist:
-        raise Http404(f'Answer {answer_id} does not exists')
+        raise Http404('Answer {} does not exists'.format(answer_id))
 
 
 def get_questions(request: HttpRequest):
@@ -45,7 +45,7 @@ def ask_question(request: HttpRequest):
         form = QuestionForm(request.POST)
         if form.is_valid():
             current_user = request.user
-            if current_user.is_authenticated :
+            if current_user.is_authenticated:
                 current_user = get_guest_user()
             question = Question.objects.create(
                 question_text=form.cleaned_data['text'],
