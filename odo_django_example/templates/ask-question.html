@@ -5,20 +5,27 @@
     <div class="row mt-5">
       <div class="col-md">
         <h2>Ask a question</h2>
-        <form action="/ask-question/" method="post">
+
+{#      Генерация красивой формы, используя стили из bootstrap #}
+        <form method="post">
           {% csrf_token %}
-          {# автоматически отрендерить форму #}
-          {{ form }}
-          {# или создать все нужные теги вручную #}
-          {# раскомментируйте, чтобы заработало #}
-          {# документацию по красивым формам из bootstrap можно посмотреть здесь: #}
-          {# http://bootstrap-4.ru/docs/4.3.1/components/forms/ #}
-{#          <div>#}
-{#            <label for="{{ form.text.id_for_label }}">Question text</label>#}
-{#            {{ form.text }}#}
-{#          </div>#}
-          <input type="submit" value="Ask">
+          {% for field in form %}
+            <div class="form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ field }}
+            </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-primary">Ask</button>
         </form>
+{# документацию по красивым формам из bootstrap можно посмотреть здесь: #}
+{# http://bootstrap-4.ru/docs/4.3.1/components/forms/ #}
+
+{#        Генерация формы по-умолчанию (очень некрасивая форма) #}
+{#        <form> #}
+{#          {% csrf_token %} #}
+{#          {{ form }} #}
+{#          <input type="submit"> #}
+{#        </form> #}
       </div>
     </div>
   </div>
