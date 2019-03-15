@@ -12,27 +12,34 @@
     {# Навигационная панель #}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       {# Ссылка-заголовок #}
-{#      <a class="navbar-brand" href="#">My wonderful A&Q</a>#}
-      <a class="navbar-brand" href="#">{{ user.username }}</a>
+      <a class="navbar-brand" href="#">My wonderful A&Q</a>
       {# Блок с кнопками в навигационной панели #}
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         {# Набор (список) кнопок, сдвинут влево (mr-auto) #}
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">  {# active -- кнопка выделена #}
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="ask-question/">Ask question</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="questions/">See questions</a>
           </li>
         </ul>
+
+        {# Приветствие пользователя #}
+        <span class="navbar-text ml-auto">Hello, <span class="font-weight-bold">{% if user.is_authenticated %}
+            {{ user.username }}
+          {% else %}
+            Guest
+          {% endif %}
+        </span></span>
 
         {# Набор (список) кнопок, сдвинут вправо (ml-auto) #}
         <ul class="navbar-nav ml-auto">
           {% if user.is_authenticated %}
-            <li><a class="nav-link" href="logout/">Logout</a> </li>
+            <li><a class="nav-link" href="/logout/">Logout</a> </li>
           {% else %}
-            <li><a class="nav-link" href="login/">Login</a> </li>
-            <li><a class="nav-link" href="register/">Register</a> </li>
+            <li><a class="nav-link" href="/login/">Login</a> </li>
+            <li><a class="nav-link" href="/register/">Register</a> </li>
           {% endif %}
         </ul>
       </div>
