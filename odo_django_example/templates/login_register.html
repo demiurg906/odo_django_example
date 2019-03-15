@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md">
+      <h2>{{ header }}</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="{{ button_label }}">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

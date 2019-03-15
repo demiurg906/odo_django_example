@@ -12,8 +12,8 @@
     {# Навигационная панель #}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       {# Ссылка-заголовок #}
-      <a class="navbar-brand" href="#">My wonderful A&Q</a>
-
+{#      <a class="navbar-brand" href="#">My wonderful A&Q</a>#}
+      <a class="navbar-brand" href="#">{{ user.username }}</a>
       {# Блок с кнопками в навигационной панели #}
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         {# Набор (список) кнопок, сдвинут влево (mr-auto) #}
@@ -28,9 +28,12 @@
 
         {# Набор (список) кнопок, сдвинут вправо (ml-auto) #}
         <ul class="navbar-nav ml-auto">
-          <li>
-            <a class="nav-link">Another button</a>
-          </li>
+          {% if user.is_authenticated %}
+            <li><a class="nav-link" href="logout/">Logout</a> </li>
+          {% else %}
+            <li><a class="nav-link" href="login/">Login</a> </li>
+            <li><a class="nav-link" href="register/">Register</a> </li>
+          {% endif %}
         </ul>
       </div>
     </nav>
